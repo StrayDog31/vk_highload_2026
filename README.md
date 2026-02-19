@@ -38,6 +38,6 @@ DAU — 35 млн. человек (весьма разыне данные на �
 - Мужчины: 25%
 
 1.4 Источники данных
-https://resourcera.com/data/social/tinder-users/
-https://www.crossrivertherapy.com/research/tinder-statistics#:~:text=Top%2010%20Key%20Statistics%20about,age%20group%20being%2025-34.
-https://datingzest.com/tinder-statistics/
+- https://resourcera.com/data/social/tinder-users/
+- https://www.crossrivertherapy.com/research/tinder-statistics#:~:text=Top%2010%20Key%20Statistics%20about,age%20group%20being%2025-34.
+- https://datingzest.com/tinder-statistics/
