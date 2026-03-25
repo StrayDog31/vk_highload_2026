@@ -219,14 +219,14 @@ L7 (Прикладной уровень)
 
 | Сущность | Описание | Размер строки | Количество строк | Размер таблицы | Нагрузка на запись (QPS, пик) | Нагрузка на чтение (QPS, пик) |
 |-------------|---------------------|-----------------|----------------|------------------|-------------------|-------------------------|
-| user | Профили пользователей (учет. данные, имя, день рождения и тд.) | ID(8) + email(255) + phone(20) + password_hash(60) + name(100) + birthday(32) + photo (8) + created_at/updated_at(16) =	499 Б | 75 млн | 35 ГБ	| 15 | 85000	|
-| photo | Загруженные фотографии (ссылка на файлы в S3) | id(8) + user_id(8) + url(255) + order(8) + uploaded_at(8) + is_deleted(1) = 288 Б	| 375 млн | 100 ГБ	| 30 | 85000	|
+| user | Профили пользователей (учет. данные, имя, день рождения и тд.) | ID(8) + email(255) + phone(20) + password_hash(60) + name(100) + birthday(32) + photo (8) + created_at/updated_at(16) =	479 Б | 75 млн | 35 ГБ	| 15 | 85000	|
+| photo | Загруженные фотографии (ссылка на файлы в S3) | id(8) + user_id(8) + url(255) + order(8) + uploaded_at(8) + is_deleted(1) = 288 Б	| 375 млн | 100 ГБ	| 13 | 85000	|
 | session | Сессии пользователей (JWT, refresh token) | token(16) + user_id(8) + device_info(50) + expires_at(8) = 82 Б	| 42 млн | 3,2 ГБ	| 10700 | 21000	|
-| messenge | Сообщения | message_id(8) + chat_id(8) + sender_id(8) + content(100) + created_at(8) + is_deleted(1) = 133 Б	| 260 млн | 32,2 ГБ	| 6000 | 12000	|
-| chat | Чаты пользователей | id(8) + member_id(8) + created_at(8) ≈ 32 Б	| 26 млн | 0,78 ГБ | 600 |1200	|
-| match | Мэтчи | id(8) + match_id(8) + created_at(16) = 32 Б | 26 млн | 0,78 ГБ | 600 | 3000	|
-| swipe | Свайпы | id(8) + creator_id(8) + person_id(8) + created_at(16) = 40 Б	| 1.6 млрд | 59,6 ГБ	| 37000 | 20000	|
-| push_notification | Уведомления | id(8) + user_id(8) + type(20) + payload(200) + status(10) + created_at(8) + sent_at(8) = 262 Б | 52 млн | 12,7 ГБ	| 900 | 2500	|
+| messenge | Сообщения | message_id(8) + chat_id(8) + sender_id(8) + content(100) + created_at(8) + is_deleted(1) = 133 Б	| 260 млн | 32,2 ГБ	| 6018 | 12000	|
+| chat | Чаты пользователей | id(8) + member_id(8) + created_at(8) ≈ 32 Б	| 26 млн | 0,78 ГБ | 600 | 1200	|
+| match | Мэтчи | id(8) + match_id(8) + created_at(16) = 32 Б | 26 млн | 0,78 ГБ | 602 | 4860	|
+| swipe | Свайпы | id(8) + creator_id(8) + person_id(8) + created_at(16) = 40 Б	| 1.6 млрд | 59,6 ГБ	| 37038 | 20000	|
+| push_notification | Уведомления | id(8) + user_id(8) + type(20) + payload(200) + status(10) + created_at(8) + sent_at(8) = 262 Б | 52 млн | 12,7 ГБ	| 902 | 1202 |
 
 ### 5.3 Требования к консистентности
 
