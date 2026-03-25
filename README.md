@@ -213,7 +213,7 @@ L7 (Прикладной уровень)
 
 ### 5.1 Схема
 
-<img width="969" height="645" alt="image" src="https://github.com/user-attachments/assets/edfbf97a-8eb9-4da0-8fa1-9f96e52fbfd5" />
+<img width="919" height="638" alt="image" src="https://github.com/user-attachments/assets/86f1e751-1640-4d1b-ac12-ae4b15f74caa" />
 
 ### 5.2 Описание сущностей
 
