@@ -286,17 +286,18 @@ L7 (Прикладной уровень)
 | СУБД | Схема | Обоснование |
 |-------------|----------------------------|-------------------------|
 | PostgreSQL | Master-slave replication (1 к 3 из коробки) | Стандартное решение, исключает полный отказ |
-| FoundationDB | Fearless DR (Multi-region replication) | Уникальное решение apple, master-region + хранение в нескольких инстансах (https://github.com/apple/foundationdb/wiki/Multi-Region-Replication) |
+| FoundationDB | Fearless DR (Multi-region replication) | Уникальное решение apple, master-region + хранение в нескольких инстансах (https://github.com/apple/foundationdb/wiki/Multi-Region-Replication), Proxy + Cluster controller (https://habr.com/ru/articles/441270/)|
 | Redis | Redis-cluster (Также идет из коробки) | Отказоустойчивость, сохранение сессий и WebSocket-маппинга |
 | Scylla | SSTable + Repair | Синхронизирует данные между репликами, поддерживает консистенцию |
 
-### 6.6 Балансировка запросов / мультиплексирование
+### 6.6 Балансировка запросов
 
 | СУБД | Схема | Обоснование |
 |-------------|----------------------------|-------------------------|
 | PostgreSQL | PGbouncer (пулл соединений) | Снижает нагрузку от постоянного открытия новых подключений, объединяя их в резистетный пулл |
 | Redis | Клиентский пулл на go | Но глобально ничего нет, редис - однопоточная штука |
-| Scylla | SSTable + Repair | Синхронизирует данные между репликами, поддерживает консистенцию |
+| Scylla | Token-aware | Запрос отправляется напрямую на нужный шард (по хешу ключа) |
+| FDB | Proxy + Cluster controller (https://habr.com/ru/articles/441270/) | Когда клиент хочет подключиться к БД, он обращается сразу ко всем Coordinators за адресом текущего Cluster Controller. Если большинство ответов совпало, он получает из Cluster Controller полную текущую конфигурацию кластера |
 
 ## 7 Алгоритмы
 
