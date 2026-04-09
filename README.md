@@ -243,6 +243,26 @@ L7 (Прикладной уровень)
 | По паре пользователей | match, chat, messenge | min(user_id1, user_id2)/chat_id | Данные по конкретной паре (матч, чат, сообщения) лежат в одном шарде. Обеспечивает сильную консистентность и быстрые запросы через шарды |
 | Георграфическое | user, photo, swipe |	user_id + гео	| Локализация рекомендаций "рядом со мной". Позволяет искать профили только в релевантных гео-шардах. |
 
+## 6 Физическая схема БД
+
+### 6.1 Схема БД
+
+### 6.2 Индексы
+
+### 6.3 Денормализация
+
+### 6.4 Выбор СУБД
+
+| Таблица | СУБД | Обоснование |
+|-------------|----------------------------|-------------------------|
+| user, photo, chats | PostgreSQL |  |
+| session | Redis |  |
+| messenges | ScyllaDB |  |
+| push_notifications | Kafka |  |
+| photo (реальные) | S3 |  |
+
+
+
 # Источники данных
 - https://resourcera.com/data/social/tinder-users/
 - https://www.crossrivertherapy.com/research/tinder-statistics#:~:text=Top%2010%20Key%20Statistics%20about,age%20group%20being%2025-34.
