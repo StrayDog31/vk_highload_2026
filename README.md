@@ -288,7 +288,7 @@ L7 (Прикладной уровень)
 | СУБД | Схема | Обоснование |
 |-------------|----------------------------|-------------------------|
 | PostgreSQL | Master-slave replication (1 к 3 из коробки) | Стандартное решение, исключает полный отказ |
-| FoundationDB | Fearless DR (Multi-region replication) | Уникальное решение apple, master-region + хранение в нескольких инстансах (https://github.com/apple/foundationdb/wiki/Multi-Region-Replication), Proxy + Cluster controller (https://habr.com/ru/articles/441270/)|
+| FoundationDB | Fearless DR (Multi-region replication) | Уникальное решение apple, master-region + хранение в нескольких инстансах (https://github.com/apple/foundationdb/wiki/Multi-Region-Replication) |
 | Redis | Redis-cluster (Также идет из коробки) | Отказоустойчивость, сохранение сессий и WebSocket-маппинга |
 | Scylla | SSTable + Repair | Синхронизирует данные между репликами, поддерживает консистенцию |
 
