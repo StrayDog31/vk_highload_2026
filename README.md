@@ -349,6 +349,9 @@ L7 (Прикладной уровень)
 
 Для хранения эмбеддингов можно задействовать векторую БД, но с натяжкой для MVP подойдет и PostgreSQL.
 
+## 10 Схема проекта
+<img width="1748" height="801" alt="image" src="https://github.com/user-attachments/assets/77e37bf0-feb2-4932-9e2b-532f8d14c516" />
+
 
 # Источники данных
 - https://resourcera.com/data/social/tinder-users/
