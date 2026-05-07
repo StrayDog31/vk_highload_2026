@@ -334,19 +334,19 @@ TTL: не устанавливается (персистентный кэш)
 При свайпе пользователя A на пользователя B:
 
 Если B тоже лайкает A (взаимный мэтч):
-\( \text{ELO}_A = \text{ELO}_A + K \times (1 - E_A) \)
-\( \text{ELO}_B = \text{ELO}_B + K \times (1 - E_B) \)
+$\text{ELO}_A = \text{ELO}_A + K \times (1 - E_A)$
+$\text{ELO}_B = \text{ELO}_B + K \times (1 - E_B)$
 
 Если B отклоняет A (дизлайк):
-- \( \text{ELO}_A = \text{ELO}_A - K \times E_A \)
-- \( \text{ELO}_B = \text{ELO}_B + K \times (0.5 - E_B) \)
+- $\text{ELO}_A = \text{ELO}_A - K \times E_A$
+- $\text{ELO}_B = \text{ELO}_B + K \times (0.5 - E_B)$
 
 где:
-- \( K = 32 \) — фактор обучения (K-factor)
-- \( E_A = \frac{1}{1 + 10^{(\text{ELO}_B - \text{ELO}_A)/400}} \) — ожидаемая вероятность успеха
+- $K = 32$ — фактор обучения (K-factor)
+- $E_A = \frac{1}{1 + 10^{(\text{ELO}_B - \text{ELO}_A)/400}}$ — ожидаемая вероятность успеха
 
 Стратегия показов по ELO:
-- 80% показов: профили с \( |\text{ELO}_{\text{user}} - \text{ELO}_{\text{candidate}}| \leq 200 \)
+- 80% показов: профили с $|\text{ELO}_{\text{user}} - \text{ELO}_{\text{candidate}}| \leq 200$
 - 15% показов: профили выше рейтинга пользователя (+200 до +500)
 - 5% показов: случайные профили (exploration для diversity)
 
@@ -364,16 +364,12 @@ TTL: не устанавливается (персистентный кэш)
 1. Читаем последние 200 лайков пользователя из FoundationDB: извлекаем записи где creator_id равен текущему пользователю и действие равно like
 
 2. Находим пользователей с похожими лайками (вычисляется в runtime): для каждого кандидата извлекаем его лайки и вычисляем коэффициент Жаккара:
-   \[
-   \text{similarity}(A, B) = \frac{|\text{likes}_A \cap \text{likes}_B|}{|\text{likes}_A \cup \text{likes}_B|}
-   \]
+$$\text{similarity}(A, B) = \frac{|\text{likes}_A \cap \text{likes}_B|}{|\text{likes}_A \cup \text{likes}_B|}$$
 
 3. Кэшируем топ-50 похожих пользователей в Redis
 
 4. Для формирования рекомендаций берем профили, которые лайкнули похожие пользователи:
-   \[
-   \text{CF\_score}(\text{profile}) = \sum_{u \in \text{similar\_users}} \text{similarity}(u, \text{current\_user}) \times \mathbb{1}(u \text{ likes profile})
-   \]
+$$\text{CF\_score}(\text{profile}) = \sum_{u \in \text{similar\_users}} \text{similarity}(u, \text{current\_user}) \times \mathbb{1}(u \text{ likes profile})$$
 
 #### 7.1.4 Слой 4: Content-Based Similarity
 
@@ -391,15 +387,13 @@ TTL: не устанавливается (персистентный кэш)
 Для каждого пользователя при первом запросе применяем TF-IDF или простой keyword matching к полю bio для извлечения интересов (например: travel, music, sport). Результат кэшируется в Redis с ключом user:interests:{user_id} и TTL = 24 часа.
 
 **Формула content similarity:**
-\[
-\text{content\_score} = 0.4 \times J(\text{interests}_A, \text{interests}_B) + 0.2 \times \text{edu\_match}(A, B) + 0.2 \times \text{lifestyle\_match}(A, B) + 0.2 \times \text{distance\_score}(A, B)
-\]
+$$\text{content\_score} = 0.4 \times J(\text{interests}_A, \text{interests}_B) + 0.2 \times \text{edu\_match}(A, B) + 0.2 \times \text{lifestyle\_match}(A, B) + 0.2 \times \text{distance\_score}(A, B)$$
 
 где:
-- \( J(A, B) \) — коэффициент Жаккара для множеств интересов (извлеченных из bio)
+- $J(A, B)$ — коэффициент Жаккара для множеств интересов (извлеченных из bio)
 - edu_match — бинарная метрика совпадения образования (0 или 1)
 - lifestyle_match — процент совпадения lifestyle-тегов
-- distance_score = \( \max(0, 1 - \frac{\text{distance\_km}}{50}) \)
+- distance_score = $\max\left(0, 1 - \frac{\text{distance\_km}}{50}\right)$
 
 #### 7.1.4 Слой 5: Machine Learning Ranking Model
 
@@ -433,9 +427,7 @@ Go-микросервис использует библиотеку ONNX Runtime
 2. Читаем ELO из Redis, применяем слой 2
 3. Формируем батч фичей, прогоняем через ONNX-модель в Go → получаем ML_score для каждого
 4. Финальный score для каждого кандидата:
-   \[
-   \text{final\_score} = 0.40 \times \text{ML\_score} + 0.25 \times \text{CF\_score} + 0.20 \times \text{ELO\_score} + 0.15 \times \text{Content\_score}
-   \]
+$$\text{final\_score} = 0.40 \times \text{ML\_score} + 0.25 \times \text{CF\_score} + 0.20 \times \text{ELO\_score} + 0.15 \times \text{Content\_score}$$
 5. Сортируем кандидатов по убыванию final_score
 6. Формируем батч из 100 профилей и отправляем клиенту
 
