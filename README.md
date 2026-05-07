@@ -334,8 +334,8 @@ TTL: не устанавливается (персистентный кэш)
 При свайпе пользователя A на пользователя B:
 
 Если B тоже лайкает A (взаимный мэтч):
-- \( \text{ELO}_A = \text{ELO}_A + K \times (1 - E_A) \)
-- \( \text{ELO}_B = \text{ELO}_B + K \times (1 - E_B) \)
+\( \text{ELO}_A = \text{ELO}_A + K \times (1 - E_A) \)
+\( \text{ELO}_B = \text{ELO}_B + K \times (1 - E_B) \)
 
 Если B отклоняет A (дизлайк):
 - \( \text{ELO}_A = \text{ELO}_A - K \times E_A \)
