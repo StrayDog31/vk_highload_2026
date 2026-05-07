@@ -369,7 +369,6 @@ $$\text{similarity}(A, B) = \frac{|\text{likes}_A \cap \text{likes}_B|}{|\text{l
 3. Кэшируем топ-50 похожих пользователей в Redis
 
 4. Для формирования рекомендаций берем профили, которые лайкнули похожие пользователи:
-$$\text{CF\_score}(\text{profile}) = \sum_{u \in \text{similar\_users}} \text{similarity}(u, \text{current\_user}) \times \mathbb{1}(u \text{ likes profile})$$
 
 #### 7.1.4 Слой 4: Content-Based Similarity
 
@@ -385,15 +384,6 @@ $$\text{CF\_score}(\text{profile}) = \sum_{u \in \text{similar\_users}} \text{si
 **Алгоритм извлечения интересов:**
 
 Для каждого пользователя при первом запросе применяем TF-IDF или простой keyword matching к полю bio для извлечения интересов (например: travel, music, sport). Результат кэшируется в Redis с ключом user:interests:{user_id} и TTL = 24 часа.
-
-**Формула content similarity:**
-$$\text{content\_score} = 0.4 \times J(\text{interests}_A, \text{interests}_B) + 0.2 \times \text{edu\_match}(A, B) + 0.2 \times \text{lifestyle\_match}(A, B) + 0.2 \times \text{distance\_score}(A, B)$$
-
-где:
-- $J(A, B)$ — коэффициент Жаккара для множеств интересов (извлеченных из bio)
-- edu_match — бинарная метрика совпадения образования (0 или 1)
-- lifestyle_match — процент совпадения lifestyle-тегов
-- distance_score = $\max\left(0, 1 - \frac{\text{distance\_km}}{50}\right)$
 
 #### 7.1.4 Слой 5: Machine Learning Ranking Model
 
