@@ -437,6 +437,23 @@ Go-микросервис использует библиотеку ONNX Runtime
 
 ## 12 Расчет ресурсов
 
+| Компонент | Модель размещения |
+|-------------|----------------------------|
+| PostgreSQL | Отдельные VM |
+| FoundationDB | Отдельные VM |
+| Scylla | Отдельные VM |
+| L4 LVS | Отдельные VM |
+| Grafana + Victoria Metrcis | Отдельные VM |
+| Auth Service | Kubernetes |
+| Chat Service | Kubernetes |
+| Macth Service | Kubernetes |
+| User Service | Kubernetes |
+| Recommendation Service | Kubernetes |
+| Notify Service | Kubernetes |
+| ML Service | Kubernetes |
+
+
+
 # Источники данных
 - https://resourcera.com/data/social/tinder-users/
 - https://www.crossrivertherapy.com/research/tinder-statistics#:~:text=Top%2010%20Key%20Statistics%20about,age%20group%20being%2025-34.
