@@ -433,7 +433,7 @@ Go-микросервис использует библиотеку ONNX Runtime
 | ClickHouse | Аналитические данные хранятся в ReplicatedMergeTree с 2 репликами на каждый shard. Graceful shutdown. |
 
 ## 11 Схема проекта
-<img width="1360" height="798" alt="image" src="https://github.com/user-attachments/assets/21a7e635-412c-44f1-9d0b-596bb589c299" />
+<img width="1655" height="784" alt="image" src="https://github.com/user-attachments/assets/a4ea23d7-5bf0-4b52-a689-5187c02d1ebd" />
 
 ## 12 Расчет ресурсов
 
